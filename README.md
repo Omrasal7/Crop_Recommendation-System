@@ -1,1 +1,1 @@
-AI based Crop Recommendation System using Random Forset Algorithm
+AI based Crop Recommendation System using Random Forest Algorithm
