@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prediction Result | KRUSHI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at 12% 12%, rgba(201, 240, 93, 0.24), transparent 20%),
+          linear-gradient(140deg, rgba(9, 32, 18, 0.78), rgba(24, 92, 54, 0.48)),
+          url("{{ url_for('static', filename='images/Bg.jpg') }}") no-repeat center center fixed;
+        background-size: cover;
+      }
+
+      .page-shell {
+        padding: 118px 0 70px;
+      }
+
+      .result-shell {
+        background: rgba(255, 250, 242, 0.9);
+        border: 1px solid rgba(29, 124, 71, 0.14);
+        border-radius: 34px;
+        box-shadow: var(--krushi-shadow);
+        overflow: hidden;
+      }
+
+      .hero-image {
+        width: 100%;
+        height: 100%;
+        min-height: 360px;
+        object-fit: cover;
+      }
+
+      .result-copy {
+        padding: 34px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(201, 240, 93, 0.24);
+        color: var(--krushi-green-dark);
+        font-size: 0.82rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .page-title {
+        margin-top: 18px;
+        font-family: "Space Grotesk", sans-serif;
+        color: var(--krushi-green-dark);
+        font-size: clamp(2.4rem, 5vw, 4rem);
+        line-height: 1;
+      }
+
+      .lead-text {
+        margin-top: 16px;
+        color: var(--krushi-muted);
+        font-size: 1.08rem;
+        line-height: 1.8;
+      }
+
+      .info-card {
+        margin-top: 22px;
+        padding: 22px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.62);
+      }
+
+      .info-card h4 {
+        color: var(--krushi-green-dark);
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      .info-card p,
+      .info-card li {
+        color: var(--krushi-muted);
+        line-height: 1.8;
+      }
+
+      .info-card ul {
+        padding-left: 1.2rem;
+        margin-bottom: 0;
+      }
+
+      .action-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .primary-btn,
+      .secondary-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 190px;
+        padding: 14px 22px;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .primary-btn {
+        color: #fff;
+        background: linear-gradient(135deg, var(--krushi-green-dark), var(--krushi-green));
+      }
+
+      .secondary-btn {
+        color: var(--krushi-green-dark);
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid rgba(29, 124, 71, 0.12);
+      }
+    </style>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+
+    <div class="page-shell">
+      <div class="container">
+        <div class="result-shell">
+          <div class="row g-0 align-items-stretch">
+            <div class="col-lg-5">
+              <img src="{{ url_for('static', filename='images/farmer.jpg') }}" class="hero-image" alt="Farmer in field">
+            </div>
+            <div class="col-lg-7">
+              <div class="result-copy">
+                <span class="eyebrow">Prediction result</span>
+                <h1 class="page-title">{{ crop_name }}</h1>
+                <p class="lead-text">{{ result_text }}</p>
+
+                <div class="info-card">
+                  <h4>Why this crop suits best</h4>
+                  <p>{{ crop_reason }}</p>
+                </div>
+
+                {% if crop_conditions %}
+                <div class="info-card">
+                  <h4>Conditions this crop usually likes</h4>
+                  <ul>
+                    {% for item in crop_conditions %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+                {% endif %}
+
+                {% if crop_tips %}
+                <div class="info-card">
+                  <h4>Useful growing tips</h4>
+                  <ul>
+                    {% for item in crop_tips %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+                {% endif %}
+
+                <div class="action-row">
+                  <a href="{{ url_for('index') }}" class="primary-btn">Try Another Prediction</a>
+                  <a href="{{ url_for('chat') }}" class="secondary-btn">Ask KrushiBot About It</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

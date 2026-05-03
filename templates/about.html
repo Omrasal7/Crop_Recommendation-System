@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About | KRUSHI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at 10% 20%, rgba(201, 240, 93, 0.22), transparent 18%),
+          linear-gradient(140deg, #f6f2e8, #ebf7ef 44%, #f8f5ed);
+      }
+
+      .page-shell {
+        padding: 118px 0 70px;
+      }
+
+      .about-card {
+        background: rgba(255, 252, 245, 0.92);
+        border: 1px solid rgba(29, 124, 71, 0.12);
+        border-radius: 34px;
+        box-shadow: var(--krushi-shadow);
+        overflow: hidden;
+      }
+
+      .about-visual {
+        min-height: 100%;
+        background:
+          linear-gradient(180deg, rgba(15, 77, 43, 0.18), rgba(15, 77, 43, 0.35)),
+          url("{{ url_for('static', filename='images/farmer.jpg') }}") no-repeat center center/cover;
+      }
+
+      .about-copy {
+        padding: 42px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(201, 240, 93, 0.22);
+        color: var(--krushi-green-dark);
+        font-size: 0.82rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .page-title {
+        margin-top: 20px;
+        font-family: "Space Grotesk", sans-serif;
+        color: var(--krushi-green-dark);
+        font-size: clamp(2.5rem, 5vw, 4.2rem);
+        line-height: 1;
+      }
+
+      .about-copy p {
+        color: var(--krushi-muted);
+        line-height: 1.9;
+        margin-top: 18px;
+      }
+
+      .point-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 28px;
+      }
+
+      .point-card {
+        padding: 18px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.65);
+      }
+
+      .point-card strong {
+        display: block;
+        color: var(--krushi-green-dark);
+        margin-bottom: 8px;
+      }
+
+      .action-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 26px;
+        padding: 14px 20px;
+        border-radius: 999px;
+        text-decoration: none;
+        color: #fff;
+        font-weight: 600;
+        background: linear-gradient(135deg, var(--krushi-green-dark), var(--krushi-green));
+      }
+
+      @media (max-width: 991.98px) {
+        .point-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+
+    <div class="page-shell">
+      <div class="container">
+        <div class="about-card">
+          <div class="row g-0">
+            <div class="col-lg-5">
+              <div class="about-visual h-100"></div>
+            </div>
+            <div class="col-lg-7">
+              <div class="about-copy">
+                <span class="eyebrow">Why KRUSHI exists</span>
+                <h1 class="page-title">Built to make agricultural decisions feel less overwhelming.</h1>
+                <p>
+                  KRUSHI is a crop recommendation and farming guidance project designed to make useful agricultural intelligence easier to access. Instead of giving farmers and learners a wall of technical data, it turns key field inputs into a focused crop suggestion and pairs that with practical advice.
+                </p>
+                <p>
+                  The goal is simple: help people choose better crops, understand their soil conditions more clearly, and get quick support on everyday farming topics such as irrigation, nutrient balance, season planning, and pest care.
+                </p>
+                <div class="point-grid">
+                  <div class="point-card">
+                    <strong>Prediction-first workflow</strong>
+                    Convert raw field values into a recommendation with a cleaner decision path.
+                  </div>
+                  <div class="point-card">
+                    <strong>Accessible guidance</strong>
+                    Keep advice readable for students, growers, and first-time users.
+                  </div>
+                  <div class="point-card">
+                    <strong>Local mindset</strong>
+                    Focus on practical agricultural concepts that fit Indian farming contexts.
+                  </div>
+                  <div class="point-card">
+                    <strong>Better user experience</strong>
+                    Bring prediction and conversational help into one coherent workspace.
+                  </div>
+                </div>
+                <a href="{{ url_for('features') }}" class="action-btn">Explore Features</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

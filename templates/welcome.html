@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KRUSHI | Smart Crop Guidance</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(201, 240, 93, 0.32), transparent 30%),
+        radial-gradient(circle at top right, rgba(36, 138, 84, 0.2), transparent 24%),
+        linear-gradient(135deg, rgba(8, 29, 17, 0.74), rgba(16, 68, 37, 0.58)),
+        url("{{ url_for('static', filename='images/background.jpeg') }}") no-repeat center center/cover;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .hero-shell {
+      padding: 120px 0 80px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      background: rgba(8, 29, 17, 0.28);
+      backdrop-filter: blur(10px);
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.92);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-content-shell {
+      padding: 34px;
+      border-radius: 34px;
+      background: linear-gradient(145deg, rgba(246, 242, 231, 0.88), rgba(234, 245, 236, 0.72));
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      box-shadow: 0 28px 60px rgba(5, 21, 12, 0.18);
+      backdrop-filter: blur(16px);
+    }
+
+    .hero-title {
+      margin-top: 22px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(3rem, 7vw, 5.6rem);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      max-width: 780px;
+      color: #173321;
+    }
+
+    .hero-title span {
+      color: #3f8f2b;
+    }
+
+    .hero-copy {
+      max-width: 620px;
+      margin-top: 22px;
+      color: rgba(24, 49, 31, 0.82);
+      font-size: 1.08rem;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 190px;
+      padding: 15px 22px;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .primary-btn {
+      color: #18311f;
+      background: linear-gradient(135deg, #d6f76d, #9ce65a);
+      box-shadow: 0 18px 32px rgba(111, 186, 56, 0.28);
+    }
+
+    .secondary-btn {
+      color: #173321;
+      border: 1px solid rgba(23, 51, 33, 0.12);
+      background: rgba(255, 255, 255, 0.66);
+      backdrop-filter: blur(10px);
+    }
+
+    .primary-btn:hover,
+    .secondary-btn:hover {
+      transform: translateY(-3px);
+      color: inherit;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 42px;
+    }
+
+    .metric-card {
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.58);
+      border: 1px solid rgba(23, 51, 33, 0.08);
+      backdrop-filter: blur(12px);
+    }
+
+    .metric-value {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 2rem;
+      color: #78a91f;
+      margin-bottom: 6px;
+    }
+
+    .metric-label {
+      color: rgba(24, 49, 31, 0.72);
+      margin: 0;
+    }
+
+    .feature-panel {
+      margin-top: 36px;
+      padding: 26px;
+      border-radius: 30px;
+      background: rgba(255, 248, 238, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 28px 60px rgba(5, 21, 12, 0.18);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature-chip {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .feature-chip strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #fff6d8;
+    }
+
+    @media (max-width: 767.98px) {
+      .hero-shell {
+        padding-top: 110px;
+      }
+
+      .hero-metrics,
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  {% include 'navbar.html' %}
+
+  <section class="hero-shell">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7">
+          <div class="hero-content-shell">
+            <div class="hero-kicker">Climate-ready farming intelligence</div>
+            <h1 class="hero-title">Grow with <span>clearer decisions</span>, not guesswork.</h1>
+            <p class="hero-copy">
+              KRUSHI blends crop prediction, practical field guidance, and a conversational assistant into one experience built for farmers, students, and agri-curious builders.
+            </p>
+            <div class="hero-actions">
+              <a href="{{ url_for('index') }}" class="primary-btn">Start Crop Prediction</a>
+              <a href="{{ url_for('chat') }}" class="secondary-btn">Open KrushiBot Chat</a>
+            </div>
+            <div class="hero-metrics">
+              <div class="metric-card">
+                <div class="metric-value">22</div>
+                <p class="metric-label">supported crop outcomes</p>
+              </div>
+              <div class="metric-card">
+                <div class="metric-value">7</div>
+                <p class="metric-label">soil and climate inputs</p>
+              </div>
+              <div class="metric-card">
+                <div class="metric-value">1</div>
+                <p class="metric-label">simple farming workspace</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="feature-panel">
+            <div class="feature-grid">
+              <div class="feature-chip">
+                <strong>Smart recommendations</strong>
+                Get crop suggestions from nutrient levels, rainfall, temperature, humidity, and pH.
+              </div>
+              <div class="feature-chip">
+                <strong>Field-friendly guidance</strong>
+                Ask about irrigation, fertilizer balance, soil health, pests, and seasonal planning.
+              </div>
+              <div class="feature-chip">
+                <strong>Fast learning curve</strong>
+                Designed for quick use on desktop or mobile with focused actions instead of clutter.
+              </div>
+              <div class="feature-chip">
+                <strong>Sustainable mindset</strong>
+                Encourage better nutrient planning, water use, and resilient farming practices.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

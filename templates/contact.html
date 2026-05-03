@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | KRUSHI</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 85% 10%, rgba(201, 240, 93, 0.22), transparent 18%),
+        linear-gradient(180deg, #f7f3ea, #eef7ef 42%, #f8f3e9);
+    }
+
+    .page-shell {
+      padding: 118px 0 70px;
+    }
+
+    .contact-card {
+      height: 100%;
+      padding: 34px;
+      border-radius: 30px;
+      border: 1px solid rgba(29, 124, 71, 0.12);
+      background: rgba(255, 252, 246, 0.92);
+      box-shadow: var(--krushi-shadow);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(201, 240, 93, 0.22);
+      color: var(--krushi-green-dark);
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .page-title {
+      margin-top: 18px;
+      font-family: "Space Grotesk", sans-serif;
+      color: var(--krushi-green-dark);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+    }
+
+    .lead-copy,
+    .contact-line {
+      color: var(--krushi-muted);
+      line-height: 1.8;
+    }
+
+    .contact-line {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .contact-line i {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(201, 240, 93, 0.22);
+      color: var(--krushi-green-dark);
+    }
+
+    .form-control {
+      min-height: 54px;
+      border-radius: 16px;
+      border: 1px solid rgba(29, 124, 71, 0.12);
+      background: rgba(255, 255, 255, 0.8);
+      padding: 14px 16px;
+    }
+
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .form-control:focus {
+      border-color: rgba(29, 124, 71, 0.38);
+      box-shadow: 0 0 0 0.22rem rgba(29, 124, 71, 0.12);
+    }
+
+    .submit-btn {
+      border: 0;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, var(--krushi-green-dark), var(--krushi-green));
+      box-shadow: 0 16px 28px rgba(29, 124, 71, 0.2);
+    }
+  </style>
+</head>
+<body>
+  {% include 'navbar.html' %}
+
+  <div class="page-shell">
+    <div class="container">
+      <div class="row g-4 align-items-stretch">
+        <div class="col-lg-5">
+          <div class="contact-card">
+            <span class="eyebrow">Contact KRUSHI</span>
+            <h1 class="page-title">Let’s keep the project growing.</h1>
+            <p class="lead-copy mt-3">
+              Reach out for feedback, collaboration, demo ideas, or next-step improvements around crop intelligence and agricultural UX.
+            </p>
+
+            <div class="mt-4 pt-2">
+              <div class="contact-line"><i class="bi bi-envelope-fill"></i><span>support@krushi.ai</span></div>
+              <div class="contact-line"><i class="bi bi-telephone-fill"></i><span>+91 9876543210</span></div>
+              <div class="contact-line"><i class="bi bi-geo-alt-fill"></i><span>Mumbai, Maharashtra, India</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="contact-card">
+            <form>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <input type="text" class="form-control" placeholder="Full Name" required>
+                </div>
+                <div class="col-md-6">
+                  <input type="email" class="form-control" placeholder="Email Address" required>
+                </div>
+                <div class="col-12">
+                  <textarea class="form-control" rows="5" placeholder="Tell us what you want help with"></textarea>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="submit-btn">Send Message</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
