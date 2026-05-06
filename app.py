@@ -435,8 +435,8 @@ FOLLOW_UP_SUGGESTIONS = [
 
 
 @app.route("/")
-def welcome():
-    return render_template("welcome.html")
+def index():
+    return render_template("index.html")
 
 
 @app.route("/about")
@@ -453,10 +453,6 @@ def features():
 def contact():
     return render_template("contact.html")
 
-
-@app.route("/index")
-def index():
-    return render_template("index.html")
 
 
 @app.route("/predict", methods=["POST"])
