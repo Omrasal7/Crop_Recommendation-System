@@ -1,6 +1,17 @@
-# KRUSHI Crop Recommendation System
+## KRUSHI Crop Recommendation System
+
+🚀 Live Demo: https://krushi-ai-omrasals-projects.vercel.app/
 
 KRUSHI is a Flask-based crop recommendation project that helps users choose a suitable crop from soil and weather inputs. It also includes a farming chatbot for general guidance on crop care, soil health, irrigation, nutrients, pests, and seasons.
+
+### Home Page
+<img width="1746" height="899" alt="image" src="https://github.com/user-attachments/assets/2f35a88f-0314-47c7-ae44-68da2989ffa2" />
+
+## Prediction Page
+<img width="1683" height="884" alt="image" src="https://github.com/user-attachments/assets/19820122-43dc-43c1-bb4e-ff20c3980470" />
+
+## Chat Bot
+<img width="1819" height="905" alt="image" src="https://github.com/user-attachments/assets/8139efcb-4ab3-4046-862e-42e97b60d05f" />
 
 ## What the project does
 
