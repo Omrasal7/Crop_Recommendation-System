@@ -434,7 +434,21 @@ FOLLOW_UP_SUGGESTIONS = [
 ]
 
 
+@app.after_request
+def add_html_cache_headers(response):
+    if response.content_type and response.content_type.startswith("text/html"):
+        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+    return response
+
+
 @app.route("/")
+def welcome():
+    return render_template("welcome.html")
+
+
+@app.route("/predict")
 def index():
     return render_template("index.html")
 
