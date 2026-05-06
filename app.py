@@ -2,13 +2,13 @@ from __future__ import annotations
 
 import pickle
 import re
-
+import os
 import numpy as np
 from flask import Flask, render_template, request
 
 # importing model
-model = pickle.load(open(r"C:\crop_recommendation\model.pkl", "rb"))
-
+model_path = os.path.join(os.path.dirname(__file__), "model.pkl")
+model = pickle.load(open(model_path, "rb"))
 # creating flask app
 app = Flask(__name__)
 
