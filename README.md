@@ -2,88 +2,96 @@
 
 🚀 Live Demo: https://krushi-recommendation.vercel.app/
 
-KRUSHI is a Flask-based crop recommendation project that helps users choose a suitable crop from soil and weather inputs. It also includes a farming chatbot for general guidance on crop care, soil health, irrigation, nutrients, pests, and seasons.
+KRUSHI is a Flask-based crop recommendation project that helps users choose a suitable crop from soil and weather inputs. It also includes a farming chatbot for general guidance on crop care, soil health, irrigation, nutrients, pests, and seasons, as well as a functional contact inquiry system powered by a local SQLite database.
 
 ### Home Page
 <img width="1881" height="893" alt="image" src="https://github.com/user-attachments/assets/ee6af049-08fa-4588-b191-12a86bc43c6b" />
 
-
 ## Prediction Page
 <img width="1687" height="883" alt="image" src="https://github.com/user-attachments/assets/6d9a624f-c1f1-4aae-8c98-7b833311fc4c" />
-
 
 ## Chat Bot
 <img width="1696" height="892" alt="image" src="https://github.com/user-attachments/assets/5349c38e-e260-4fd1-84a3-cc9a9bf38137" />
 
-
 ## What the project does
 
-- predicts a suitable crop from soil and climate values
+- predicts a suitable crop from soil and climate values across 22 supported crops
 - accepts nitrogen, phosphorus, potassium, pH, temperature, humidity, and rainfall inputs
 - shows the prediction result on a dedicated result page
 - explains why the predicted crop is a good fit
-- provides crop-specific growing tips
-- includes a chatbot for general farming questions
+- provides crop-specific growing tips and preferred conditions
+- includes a farming assistant chatbot (KrushiBot) for quick agronomy queries
+- collects and stores user inquiries and feedback in an SQLite database
 
 ## Tech stack
 
-- Python
-- Flask
-- NumPy
-- scikit-learn model loaded from `model.pkl`
-- HTML, CSS, Bootstrap
+- **Backend:** Python, Flask
+- **Machine Learning:** scikit-learn (Random Forest Classifier), NumPy, Pandas
+- **Database:** SQLite3 (`feedback.db`)
+- **Frontend:** HTML5, CSS3, Bootstrap 5, Poppins font
 
 ## Project structure
 
-- [app.py](C:/crop_recommendation/app.py:1): main Flask application
-- [model.pkl](C:/crop_recommendation/model.pkl): trained crop prediction model
-- [minmaxscaler.pkl](C:/crop_recommendation/minmaxscaler.pkl): scaler artifact kept in the project
-- [templates](C:/crop_recommendation/templates): all HTML templates
-- [static](C:/crop_recommendation/static): images and static assets
-- [requirements.txt](C:/crop_recommendation/requirements.txt:1): Python dependencies
+- `app.py`: main Flask application, routing, ML prediction endpoint, chatbot logic, and DB connection
+- `model.pkl`: trained Random Forest crop classification model
+- `feedback.db`: SQLite database storing contact form submissions
+- `Crop_recommendation.csv`: agricultural dataset used for model training
+- `templates/`: all frontend HTML templates (`welcome.html`, `index.html`, `result.html`, `about.html`, `features.html`, `chat.html`, `contact.html`, `navbar.html`)
+- `static/`: stylesheets and image assets (`logo.jpg`, `background.jpeg`, `Bg.jpg`, `farmer.jpg`)
+- `requirements.txt`: Python dependencies
 
 ## Main pages
 
-- `/`: landing page
-- `/index`: crop prediction form
-- `/predict`: prediction endpoint
-- `/chat`: KrushiBot chat interface
-- `/about`: project overview
-- `/features`: product features
-- `/contact`: contact page
+- `/`: landing / home page
+- `/predict`: crop prediction form & prediction handler
+- `/chat`: KrushiBot interactive farming assistant
+- `/about`: project overview & dataset specifications
+- `/features`: feature highlights & how-to-use guide
+- `/contact`: contact & feedback form connected to SQLite database
+
+## Database (SQLite)
+
+The project includes an integrated SQLite database (`feedback.db`) to store user inquiries:
+
+### Table: `feedback`
+| Column | Type | Description |
+|---|---|---|
+| `id` | `INTEGER PRIMARY KEY AUTOINCREMENT` | Unique submission ID |
+| `name` | `TEXT` | Sender's full name |
+| `email` | `TEXT` | Sender's email address |
+| `message` | `TEXT` | Inquiry or feedback content |
+| `created_at` | `TIMESTAMP DEFAULT CURRENT_TIMESTAMP` | Submission timestamp |
 
 ## How prediction works
 
-1. The user enters:
-   - Nitrogen
-   - Phosphorus
-   - Potassium
-   - pH
-   - Temperature
-   - Humidity
-   - Rainfall
-2. The Flask app converts those values into a feature array.
-3. The trained model predicts a crop class.
-4. The predicted class is mapped to a crop name.
-5. A result page shows:
-   - predicted crop
-   - why it suits the conditions
-   - conditions the crop usually prefers
-   - practical growing tips
+1. The user enters 7 key parameters:
+   - Nitrogen (N)
+   - Phosphorus (P)
+   - Potassium (K)
+   - Soil pH
+   - Temperature (°C)
+   - Humidity (%)
+   - Rainfall (mm)
+2. The Flask app receives the inputs via `POST /predict`.
+3. The trained Random Forest model predicts the crop class ID.
+4. The ID is mapped to the corresponding crop name (out of 22 supported crops).
+5. A detailed result page displays:
+   - Recommended crop name
+   - Agronomic rationale for why the crop was selected
+   - Preferred growing conditions
+   - Practical field tips
 
 ## Chatbot
 
-The chatbot is a local rule-based farming assistant. It does not currently depend on any external API key.
+The chatbot is a local rule-based farming assistant (KrushiBot). It runs without requiring any external paid API keys.
 
-It can answer general questions about:
-
-- soil fertility
-- NPK and nutrients
-- irrigation
-- pests and diseases
-- crop seasons
-- crop-specific guidance
-- basic conversational prompts like `thanks`, `help`, and `bye`
+It can answer questions about:
+- Soil fertility and preparation
+- NPK and nutrient management
+- Irrigation practices (e.g. drip, sprinkler)
+- Pest and disease prevention
+- Crop seasons (Kharif, Rabi, Zaid)
+- Crop-specific cultivation guidance
 
 ## Run locally
 
@@ -96,7 +104,7 @@ It can answer general questions about:
    ```bash
    python app.py
    ```
-4. Open the local URL shown by Flask in your browser
+4. Open `http://127.0.0.1:5000` in your web browser.
 
 ## Input example
 
@@ -105,27 +113,13 @@ You can test the predictor with values like:
 - Nitrogen: `90`
 - Phosphorus: `42`
 - Potassium: `43`
-- pH: `6.5`
+- Soil pH: `6.5`
 - Temperature: `25.5`
 - Humidity: `80`
 - Rainfall: `200`
-
-## Current limitations
-
-- the chatbot is dynamic within a rule-based knowledge system, not a full LLM
-- the prediction explanation is template-based, not generated by a model
-- the project currently uses local assets and does not store user history
-- `model.pkl` shows a scikit-learn version mismatch warning in the current environment, so predictions should be validated carefully
-
-## Future improvements
-
-- add conversation memory to the chatbot
-- show the submitted input summary on the result page
-- retrain or re-export the model using the current scikit-learn version
-- connect the contact form to a real backend action
-- add multilingual chatbot support
+*(Expected result: Rice)*
 
 ## Notes
 
-- This project is intended as a practical educational/demo system for crop recommendation and farming guidance.
-- Before using it for real agricultural decisions, validate recommendations with local agronomy knowledge, seasonal conditions, and field testing.
+- This project is developed as an MCA academic project demonstrating machine learning integration in practical agriculture.
+- Recommendations are model-based estimates and can be combined with local soil test laboratory reports for field implementation.
