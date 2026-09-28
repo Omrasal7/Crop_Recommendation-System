@@ -1,180 +1,222 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Prediction Result | KRUSHI</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <style>
-      body {
-        min-height: 100vh;
-        background:
-          radial-gradient(circle at 12% 12%, rgba(201, 240, 93, 0.24), transparent 20%),
-          linear-gradient(140deg, rgba(9, 32, 18, 0.78), rgba(24, 92, 54, 0.48)),
-          url("{{ url_for('static', filename='images/Bg.jpg') }}") no-repeat center center fixed;
-        background-size: cover;
-      }
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Result | Krushi</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #f8faf8;
+      font-family: "Poppins", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-      .page-shell {
-        padding: 118px 0 70px;
-      }
+    .page-shell {
+      padding: 30px 0 50px;
+      flex: 1 0 auto;
+    }
 
-      .result-shell {
-        background: rgba(255, 250, 242, 0.9);
-        border: 1px solid rgba(29, 124, 71, 0.14);
-        border-radius: 34px;
-        box-shadow: var(--krushi-shadow);
-        overflow: hidden;
-      }
+    /* Result header */
+    .result-header {
+      background: #edf7ef;
+      border: 1px solid #b8ddbf;
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin-bottom: 22px;
+    }
 
-      .hero-image {
-        width: 100%;
-        height: 100%;
-        min-height: 360px;
-        object-fit: cover;
-      }
+    .result-header .label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #2d7a3a;
+      margin-bottom: 6px;
+    }
 
-      .result-copy {
-        padding: 34px;
-      }
+    .result-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1a4f24;
+      margin-bottom: 6px;
+    }
 
-      .eyebrow {
-        display: inline-flex;
-        padding: 8px 14px;
-        border-radius: 999px;
-        background: rgba(201, 240, 93, 0.24);
-        color: var(--krushi-green-dark);
-        font-size: 0.82rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-      }
+    .result-header .lead {
+      color: #3a6642;
+      font-size: 0.95rem;
+      margin: 0;
+    }
 
-      .page-title {
-        margin-top: 18px;
-        font-family: "Space Grotesk", sans-serif;
-        color: var(--krushi-green-dark);
-        font-size: clamp(2.4rem, 5vw, 4rem);
-        line-height: 1;
-      }
+    /* Info cards */
+    .info-card {
+      background: #fff;
+      border: 1px solid #d4e8d8;
+      border-radius: 8px;
+      padding: 20px 22px;
+      margin-bottom: 16px;
+    }
 
-      .lead-text {
-        margin-top: 16px;
-        color: var(--krushi-muted);
-        font-size: 1.08rem;
-        line-height: 1.8;
-      }
+    .info-card h5 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #2d7a3a;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #d4e8d8;
+    }
 
-      .info-card {
-        margin-top: 22px;
-        padding: 22px;
-        border-radius: 24px;
-        background: rgba(255, 255, 255, 0.62);
-      }
+    .info-card p {
+      color: #3c4f40;
+      font-size: 0.9rem;
+      line-height: 1.75;
+      margin: 0;
+    }
 
-      .info-card h4 {
-        color: var(--krushi-green-dark);
-        font-weight: 700;
-        margin-bottom: 12px;
-      }
+    .info-card ul {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
 
-      .info-card p,
-      .info-card li {
-        color: var(--krushi-muted);
-        line-height: 1.8;
-      }
+    .info-card ul li {
+      color: #3c4f40;
+      font-size: 0.9rem;
+      line-height: 1.75;
+      margin-bottom: 4px;
+    }
 
-      .info-card ul {
-        padding-left: 1.2rem;
-        margin-bottom: 0;
-      }
+    /* Farmer image */
+    .farmer-img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #d4e8d8;
+      object-fit: cover;
+      max-height: 340px;
+    }
 
-      .action-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 14px;
-        margin-top: 28px;
-      }
+    /* Action buttons */
+    .action-area {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
 
-      .primary-btn,
-      .secondary-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 190px;
-        padding: 14px 22px;
-        border-radius: 999px;
-        text-decoration: none;
-        font-weight: 700;
-      }
+    .btn-primary-g {
+      display: inline-block;
+      padding: 10px 24px;
+      background: #2d7a3a;
+      color: #fff;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
 
-      .primary-btn {
-        color: #fff;
-        background: linear-gradient(135deg, var(--krushi-green-dark), var(--krushi-green));
-      }
+    .btn-primary-g:hover {
+      background: #1a4f24;
+      color: #fff;
+    }
 
-      .secondary-btn {
-        color: var(--krushi-green-dark);
-        background: rgba(255, 255, 255, 0.76);
-        border: 1px solid rgba(29, 124, 71, 0.12);
-      }
-    </style>
-  </head>
-  <body>
-    {% include 'navbar.html' %}
+    .btn-outline-g {
+      display: inline-block;
+      padding: 10px 24px;
+      background: #fff;
+      color: #2d7a3a;
+      border: 1px solid #2d7a3a;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
 
-    <div class="page-shell">
-      <div class="container">
-        <div class="result-shell">
-          <div class="row g-0 align-items-stretch">
-            <div class="col-lg-5">
-              <img src="{{ url_for('static', filename='images/farmer.jpg') }}" class="hero-image" alt="Farmer in field">
-            </div>
-            <div class="col-lg-7">
-              <div class="result-copy">
-                <span class="eyebrow">Prediction result</span>
-                <h1 class="page-title">{{ crop_name }}</h1>
-                <p class="lead-text">{{ result_text }}</p>
+    .btn-outline-g:hover {
+      background: #2d7a3a;
+      color: #fff;
+    }
 
-                <div class="info-card">
-                  <h4>Why this crop suits best</h4>
-                  <p>{{ crop_reason }}</p>
-                </div>
+    /* Footer */
+    .site-footer {
+      background: #1a4f24;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.83rem;
+      padding: 16px 0;
+      text-align: center;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  {% include 'navbar.html' %}
 
-                {% if crop_conditions %}
-                <div class="info-card">
-                  <h4>Conditions this crop usually likes</h4>
-                  <ul>
-                    {% for item in crop_conditions %}
-                    <li>{{ item }}</li>
-                    {% endfor %}
-                  </ul>
-                </div>
-                {% endif %}
+  <div class="page-shell">
+    <div class="container">
 
-                {% if crop_tips %}
-                <div class="info-card">
-                  <h4>Useful growing tips</h4>
-                  <ul>
-                    {% for item in crop_tips %}
-                    <li>{{ item }}</li>
-                    {% endfor %}
-                  </ul>
-                </div>
-                {% endif %}
+      <!-- Result banner -->
+      <div class="result-header">
+        <div class="label">Recommended Crop</div>
+        <h1>{{ crop_name }}</h1>
+        <p class="lead">{{ result_text }}</p>
+      </div>
 
-                <div class="action-row">
-                  <a href="{{ url_for('index') }}" class="primary-btn">Try Another Prediction</a>
-                  <a href="{{ url_for('chat') }}" class="secondary-btn">Ask KrushiBot About It</a>
-                </div>
-              </div>
-            </div>
+      <div class="row g-4">
+        <!-- Left column: image -->
+        <div class="col-lg-4 col-md-5">
+          <img src="{{ url_for('static', filename='images/Bg.jpg') }}" alt="Crop field" class="farmer-img">
+        </div>
+
+        <!-- Right column: details -->
+        <div class="col-lg-8 col-md-7">
+          <div class="info-card">
+            <h5>Why this crop was recommended</h5>
+            <p>{{ crop_reason }}</p>
+          </div>
+
+          {% if crop_conditions %}
+          <div class="info-card">
+            <h5>Conditions this crop prefers</h5>
+            <ul>
+              {% for item in crop_conditions %}
+              <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+
+          {% if crop_tips %}
+          <div class="info-card">
+            <h5>Growing tips</h5>
+            <ul>
+              {% for item in crop_tips %}
+              <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+
+          <div class="action-area">
+            <a href="{{ url_for('index') }}" class="btn-primary-g">Try Another Prediction</a>
+            <a href="{{ url_for('chat') }}" class="btn-outline-g">Ask KrushiBot</a>
           </div>
         </div>
       </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="mb-0">Krushi &mdash; Crop Recommendation System &nbsp;|&nbsp; MCA Project</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

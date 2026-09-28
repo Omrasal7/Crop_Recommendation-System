@@ -3,6 +3,23 @@ from __future__ import annotations
 import pickle
 import re
 import os
+import sqlite3
+
+def init_db():
+    db_path = os.path.join(os.path.dirname(__file__), "feedback.db")
+    with sqlite3.connect(db_path) as conn:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS feedback (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                email TEXT NOT NULL,
+                message TEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+
+init_db()
+
 import numpy as np
 from flask import Flask, render_template, request
 
@@ -463,8 +480,20 @@ def features():
     return render_template("features.html")
 
 
-@app.route("/contact")
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
+    if request.method == "POST":
+        name = request.form.get("name", "").strip()
+        email = request.form.get("email", "").strip()
+        message = request.form.get("message", "").strip()
+        if name and email and message:
+            db_path = os.path.join(os.path.dirname(__file__), "feedback.db")
+            with sqlite3.connect(db_path) as conn:
+                conn.execute(
+                    "INSERT INTO feedback (name, email, message) VALUES (?, ?, ?)",
+                    (name, email, message)
+                )
+            return render_template("contact.html", success=True, sender_name=name)
     return render_template("contact.html")
 
 
